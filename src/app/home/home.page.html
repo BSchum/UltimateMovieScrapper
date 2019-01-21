@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-title>UMS</ion-title>
+  <ion-toolbar>
+    <ion-searchbar
+      [(ngModel)]="searchText"
+      (ionChange)="onInput($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="movies">
+    <div *ngFor="let movie of movies.Search">
+      <ion-card class="movie-card" (click)="onMovieClick(movie.imdbID)">
+          <ion-img class="poster" src="{{movie.Poster}}"></ion-img>
+          <div class="overlay">
+              <ion-card-header>
+                  <ion-card-title class="title">{{movie.Title}}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-badge>{{movie.Type}}</ion-badge>
+                <ion-badge color="tertiary">{{movie.Year}}</ion-badge>
+              </ion-card-content>
+          </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

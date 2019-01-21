@@ -1,0 +1,32 @@
+.movieContent{
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    padding-top: 30px;
+}
+
+.movieTitle{
+    margin-top: 0;
+    color: black;
+}
+
+ion-card{
+    background-color: white !important;
+    margin-top: 0px !important;
+}
+
+.umsicon{
+    display: block;
+    float: right;
+}
+
+.title{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.bold{
+    font-weight: bold !important;
+}

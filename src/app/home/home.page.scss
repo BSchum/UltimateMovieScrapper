@@ -1,0 +1,19 @@
+.movie-card{
+    position: relative
+}
+
+.overlay{
+    position: absolute;
+    bottom: 0;
+}
+
+.title{
+    color: white;
+}
+
+.poster{
+    filter: brightness(50%);
+    min-height: 400px;
+    background: black;
+    vertical-align: middle;
+}

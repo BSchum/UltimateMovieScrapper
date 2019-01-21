@@ -1,0 +1,57 @@
+<ion-content>
+  <div class="movieContent" *ngIf="movie" [ngStyle]="{'background-image': poster}">
+    <ion-card> 
+        <ion-card-header class="noOpac">
+          <h2 class="movieTitle">{{movie.Title}}</h2>
+          <ion-badge>{{movie.Released}}</ion-badge>
+          <ion-badge color="tertiary">{{movie.Genre}}</ion-badge>
+          <ion-badge color="success">{{movie.Runtime}}</ion-badge>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="title" (click)="showme=!showme">
+            <span>Description </span>
+            <ion-icon class="umsicon" *ngIf="showme"  name="arrow-up"></ion-icon>
+            <ion-icon class="umsicon" *ngIf="!showme"  name="arrow-down"></ion-icon>
+          </div>  
+          <div class="" *ngIf="showme">
+              <p>{{movie.Plot}}</p>
+          </div>
+
+          <div class="title" (click)="actorshowme=!actorshowme" >
+            <span>Acteurs</span>
+            <ion-icon class="umsicon" *ngIf="actorshowme"  name="arrow-up"></ion-icon>
+            <ion-icon class="umsicon" *ngIf="!actorshowme"  name="arrow-down"></ion-icon>
+          </div>
+          <div *ngIf="actorshowme" >
+            <p>{{movie.Actors}}</p>
+          </div>
+
+          
+          <div class="title" (click)="infoshowme=!infoshowme" >
+              <span>Informations</span>
+              <ion-icon class="umsicon" *ngIf="infoshowme"  name="arrow-up"></ion-icon>
+              <ion-icon class="umsicon" *ngIf="!infoshowme"  name="arrow-down"></ion-icon>
+            </div>
+            <div *ngIf="infoshowme">
+              <div *ngIf="movie.Actors != 'N/A'" >
+                <p class="bold">Acteurs</p>
+                <p>{{movie.Actors}}</p>
+              </div>
+              <div *ngIf="movie.Production != 'N/A'">
+                <p class="bold">Production: </p>
+                <p>{{movie.Production}}</p>
+              </div>
+              <div *ngIf="movie.Director != 'N/A'">
+                <p class="bold">Directeur</p>
+                <p>{{movie.Director}}</p>
+              </div>
+              <div *ngIf="movie.Prices != 'N/A'">
+                <p class="bold">Prix gagné</p>
+                <p>{{movie.Director}}</p>
+              </div>
+            </div>
+        </ion-card-content>
+      </ion-card>
+  </div>
+</ion-content>
+
