@@ -1,5 +1,6 @@
 import { URLCallerHelper } from './../helpers/URLCallerHelper';
 import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver } from '@angular/core/src/render3';
 
 @Injectable()
 export class MovieProviderService {
@@ -32,5 +33,17 @@ export class MovieProviderService {
         reject(err);
       });
     })
+  }
+
+  public GetPoster(id: string){
+    return new Promise((resolve, reject) => {
+      let url = MovieProviderService.IMG_API_URL+"?apiKey="+MovieProviderService.API_KEY+"&i="+id+"&h=9000";
+      console.log(url);
+      this.caller.Get(url, "blob").then((data) =>{
+        resolve(url);
+      }).catch((err)=>{
+        reject(err);
+      });
+    });
   }
 }

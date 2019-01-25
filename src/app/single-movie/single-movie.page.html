@@ -1,6 +1,10 @@
 <ion-content>
   <div class="movieContent" *ngIf="movie" [ngStyle]="{'background-image': poster}">
-    <ion-card> 
+    <div #hideButton (click)="fadeCard()" class="hide">
+        <ion-icon name="close"></ion-icon>    
+    </div>
+    <div #singleMovieCard class="fade">
+    <ion-card > 
         <ion-card-header class="noOpac">
           <h2 class="movieTitle">{{movie.Title}}</h2>
           <ion-badge>{{movie.Released}}</ion-badge>
@@ -12,7 +16,7 @@
             <span>Description </span>
             <ion-icon class="umsicon" *ngIf="showme"  name="arrow-up"></ion-icon>
             <ion-icon class="umsicon" *ngIf="!showme"  name="arrow-down"></ion-icon>
-          </div>  
+          </div>
           <div class="" *ngIf="showme">
               <p>{{movie.Plot}}</p>
           </div>
@@ -50,8 +54,34 @@
                 <p>{{movie.Director}}</p>
               </div>
             </div>
+
+            <div class="title" (click)="markshowme=!markshowme" >
+              <span>Notes</span>
+              <ion-icon class="umsicon" *ngIf="markshowme"  name="arrow-up"></ion-icon>
+              <ion-icon class="umsicon" *ngIf="!markshowme"  name="arrow-down"></ion-icon>
+            </div>
+            <div *ngIf="markshowme">
+              <div *ngIf="movie.imdbRating != 'N/A'">
+                <div *ngFor="let star of rating">
+                    <div *ngIf="star == 1">
+                      <ion-icon class="markIcons" name="star"></ion-icon>                    
+                    </div>
+                    <div *ngIf="star == 2">
+                      <ion-icon class="markIcons" name="star-half"></ion-icon>                    
+                    </div>
+                    <div *ngIf="star == 3">
+                      <ion-icon class="markIcons" name="star-outline"></ion-icon>                    
+                    </div>
+                </div>
+                <div>{{movie.imdbRating}}/10</div>
+              </div>
+              <div *ngIf="movie.imdbVotes != 'N/A'" class="nbVotes">
+                <p class="voteP">{{movie.imdbVotes}} nombre de votes</p>
+              </div>
+            </div>
         </ion-card-content>
       </ion-card>
+    </div>
   </div>
 </ion-content>
 

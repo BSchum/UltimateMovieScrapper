@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-
   <div *ngIf="movies">
     <div *ngFor="let movie of movies.Search">
       <ion-card class="movie-card" (click)="onMovieClick(movie.imdbID)">
@@ -25,4 +24,5 @@
       </ion-card>
     </div>
   </div>
+
 </ion-content>

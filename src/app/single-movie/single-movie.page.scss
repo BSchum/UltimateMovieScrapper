@@ -30,3 +30,29 @@ ion-card{
 .bold{
     font-weight: bold !important;
 }
+
+.markIcons{
+    float: left;
+    color: black;
+    font-size: 16px;
+}
+
+.voteP{
+    font-size: 10px !important;
+}
+
+.hide{
+    font-size: 30px;
+    margin-left: 16px;
+    background: white;
+    width: 40px;
+    height: 33px;
+    text-align: center;
+    border-radius: 5px;
+    transition: 0.5s linear;
+    margin-bottom: 3px;
+}
+
+.fade{
+    transition: 0.5s linear;
+}
