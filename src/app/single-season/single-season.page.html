@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>single-season</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="season" >
+    <ion-list *ngFor="let episode of season.Episodes" >
+      <ion-item>
+        <ion-label>
+          {{episode.Title}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -13,26 +13,17 @@ var URLCallerHelper = /** @class */ (function () {
     function URLCallerHelper(http) {
         this.http = http;
     }
-    URLCallerHelper.prototype.Get = function (url) {
+    URLCallerHelper.prototype.Get = function (url, type) {
         var _this = this;
+        if (type === void 0) { type = 'json'; }
         return new Promise(function (resolve, reject) {
-            _this.http.get(url).subscribe(function (data) {
+            _this.http.get(url, { responseType: type }).subscribe(function (data) {
+                console.log("resolve UrlCallerhelper");
                 resolve(data);
-            }), function (err) {
-                console.log("C'est une error" + err);
+            }, function (err) {
+                console.log("reject UrlCallerHelper");
                 reject(err);
-            };
-        });
-    };
-    URLCallerHelper.prototype.GetImage = function (url) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.http.get(url, { responseType: 'blob' }).subscribe(function (data) {
-                resolve(data);
-            }), function (err) {
-                console.log("C'est une error" + err);
-                reject(err);
-            };
+            });
         });
     };
     URLCallerHelper = __decorate([

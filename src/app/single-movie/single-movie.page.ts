@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieProviderService } from './../services/movie-provider.service';
 import { TouchSequence } from 'selenium-webdriver';
 import { CloneVisitor } from '@angular/compiler/src/i18n/i18n_ast';
+import { NavController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-single-movie',
@@ -20,11 +21,11 @@ export class SingleMoviePage implements OnInit {
   markshowme: boolean = false;
   hideInfos: boolean = true;
   rating : number[];
-
+  seasonshowme: boolean[];
   @ViewChild("singleMovieCard") singleMovieCard;
   @ViewChild("hideButton") hideButton;
 
-  constructor(private provider: MovieProviderService, private thisRoute:ActivatedRoute, private renderer: Renderer) { }
+  constructor(private provider: MovieProviderService, private thisRoute:ActivatedRoute, private renderer: Renderer, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.thisRoute.params.subscribe(params => {
@@ -34,13 +35,17 @@ export class SingleMoviePage implements OnInit {
 
         this.provider.GetPoster(this.id).then((url: string) =>{
           this.poster = "url("+url+")";
-          console.log(this.poster);
-
         }).catch((err) => {
            this.poster = "url("+this.movie.Poster+")";
-           console.log(this.poster);
-
         });
+        if(this.movie.Type == "series"){
+          this.provider.GetSeasons(this.id, this.movie.totalSeasons).then(data => {
+            this.movie.Seasons = data;
+            console.log(data);
+            this.seasonshowme = Array(this.movie.Seasons.length).fill(true);
+          });
+        }
+
         let nbFullStar = Math.floor(this.movie.imdbRating);
         let nbHalfStar = Math.ceil(this.movie.imdbRating - nbFullStar);
         let nbEmptyStar = 10 - (nbFullStar + nbHalfStar);
@@ -61,5 +66,9 @@ export class SingleMoviePage implements OnInit {
       this.renderer.setElementStyle(this.hideButton.nativeElement, 'background-color', 'white');
 
     }
+  }
+
+  goToSeason(seasonID: any, serieID: any){
+    this.navCtrl.navigateForward(['single-season', {seasonID: seasonID, serieID:serieID}]);
   }
 }

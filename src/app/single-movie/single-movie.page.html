@@ -80,7 +80,25 @@
               </div>
             </div>
         </ion-card-content>
-      </ion-card>
+    </ion-card>
+
+    <ion-card *ngIf="movie.Seasons" >
+      <ion-card-header>
+        <h3 class="movieTitle"> Saisons </h3>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list *ngIf="movie.Seasons">
+          <div *ngFor="let season of movie.Seasons">
+            <ion-item class="title">
+              <ion-label>S{{season.Season}} :  {{ season.Episodes.length}} épisodes</ion-label>
+              <ion-button fill="clear" (click)="goToSeason(season.Season, id)" >
+                View
+              </ion-button>  
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
     </div>
   </div>
 </ion-content>

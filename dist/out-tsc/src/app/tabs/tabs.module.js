@@ -4,24 +4,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule } from '@angular/router';
-var routes = [
-    { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-    { path: 'single-movie', loadChildren: './single-movie/single-movie.module#SingleMoviePageModule' },
-];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TabsPageRoutingModule } from './tabs-routing.module';
+import { TabsPage } from './tabs.page';
+var TabsPageModule = /** @class */ (function () {
+    function TabsPageModule() {
     }
-    AppRoutingModule = __decorate([
+    TabsPageModule = __decorate([
         NgModule({
             imports: [
-                RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+                IonicModule,
+                CommonModule,
+                FormsModule,
+                TabsPageRoutingModule
             ],
-            exports: [RouterModule]
+            declarations: [TabsPage]
         })
-    ], AppRoutingModule);
-    return AppRoutingModule;
+    ], TabsPageModule);
+    return TabsPageModule;
 }());
-export { AppRoutingModule };
-//# sourceMappingURL=app-routing.module.js.map
+export { TabsPageModule };
+//# sourceMappingURL=tabs.module.js.map

@@ -7,23 +7,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import { ActivatedRoute } from '@angular/router';
 import { MovieProviderService } from './../services/movie-provider.service';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 var HomePage = /** @class */ (function () {
-    function HomePage(provider, navCtrl) {
+    function HomePage(provider, navCtrl, route) {
         this.provider = provider;
         this.navCtrl = navCtrl;
+        this.route = route;
     }
     HomePage.prototype.OnSearch = function (search) {
         var _this = this;
         if (search != "") {
-            this.provider.GetMovies(search).then(function (data) {
-                _this.movies = data;
-                console.log(_this.movies);
-                _this.movies.Search.sort(function (a, b) {
-                    return b.Year - a.Year;
-                });
+            this.route.params.subscribe(function (data) {
+                if (data.id == "movies") {
+                    _this.provider.GetMovies(search).then(function (data) {
+                        _this.movies = data;
+                        console.log(_this.movies);
+                        _this.movies.Search.sort(function (a, b) {
+                            return b.Year - a.Year;
+                        });
+                    });
+                }
+                else {
+                    _this.provider.GetSeries(search).then(function (data) {
+                        _this.movies = data;
+                        console.log(_this.movies);
+                        _this.movies.Search.sort(function (a, b) {
+                            return b.Year - a.Year;
+                        });
+                    });
+                }
             });
         }
     };
@@ -42,7 +57,7 @@ var HomePage = /** @class */ (function () {
             templateUrl: 'home.page.html',
             styleUrls: ['home.page.scss'],
         }),
-        __metadata("design:paramtypes", [MovieProviderService, NavController])
+        __metadata("design:paramtypes", [MovieProviderService, NavController, ActivatedRoute])
     ], HomePage);
     return HomePage;
 }());

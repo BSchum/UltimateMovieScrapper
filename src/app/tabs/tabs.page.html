@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>tabs</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
 
-<ion-content padding>
+  <ion-tab-bar #menu slot="bottom">
+    <ion-tab-button tab="home/movies">
+      <ion-icon name="flash"></ion-icon>
+      <ion-label>Movies</ion-label>
+    </ion-tab-button>
 
-</ion-content>
+    <ion-tab-button tab="home/series">
+      <ion-icon name="apps"></ion-icon>
+      <ion-label>Series</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
