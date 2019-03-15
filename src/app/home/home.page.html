@@ -9,7 +9,7 @@
 <ion-content padding>
   <div *ngIf="movies">
     <div *ngFor="let movie of movies.Search">
-      <ion-card class="movie-card" (click)="onMovieClick(movie.imdbID)">
+      <ion-card class="movie-card" (click)="onMovieClick(movie.imdbID)" >
           <ion-img class="poster" src="{{movie.Poster}}"></ion-img>
           <div class="overlay">
               <ion-card-header>
@@ -23,5 +23,4 @@
       </ion-card>
     </div>
   </div>
-
 </ion-content>

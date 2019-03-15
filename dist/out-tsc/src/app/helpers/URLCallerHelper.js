@@ -18,10 +18,8 @@ var URLCallerHelper = /** @class */ (function () {
         if (type === void 0) { type = 'json'; }
         return new Promise(function (resolve, reject) {
             _this.http.get(url, { responseType: type }).subscribe(function (data) {
-                console.log("resolve UrlCallerhelper");
                 resolve(data);
             }, function (err) {
-                console.log("reject UrlCallerHelper");
                 reject(err);
             });
         });

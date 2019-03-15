@@ -1,3 +1,4 @@
+import { FavoriteService } from './../services/favorite.service';
 import { Component, OnInit, ViewEncapsulation, ViewChild, Renderer } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieProviderService } from './../services/movie-provider.service';
@@ -23,9 +24,8 @@ export class SingleMoviePage implements OnInit {
   rating : number[];
   seasonshowme: boolean[];
   @ViewChild("singleMovieCard") singleMovieCard;
-  @ViewChild("hideButton") hideButton;
 
-  constructor(private provider: MovieProviderService, private thisRoute:ActivatedRoute, private renderer: Renderer, private navCtrl: NavController) { }
+  constructor(private provider: MovieProviderService, private thisRoute:ActivatedRoute, private renderer: Renderer, private navCtrl: NavController, private favorites: FavoriteService) { }
 
   ngOnInit() {
     this.thisRoute.params.subscribe(params => {
@@ -41,7 +41,6 @@ export class SingleMoviePage implements OnInit {
         if(this.movie.Type == "series"){
           this.provider.GetSeasons(this.id, this.movie.totalSeasons).then(data => {
             this.movie.Seasons = data;
-            console.log(data);
             this.seasonshowme = Array(this.movie.Seasons.length).fill(true);
           });
         }
@@ -50,25 +49,28 @@ export class SingleMoviePage implements OnInit {
         let nbHalfStar = Math.ceil(this.movie.imdbRating - nbFullStar);
         let nbEmptyStar = 10 - (nbFullStar + nbHalfStar);
         this.rating = Array(10).fill(1, 0, nbFullStar).fill(2, nbFullStar, nbFullStar + nbHalfStar).fill(3,10 - nbEmptyStar, 10);
-        console.log(this.rating);
         });
     });
   }
 
   fadeCard(){
-    console.log(this.singleMovieCard);
     this.hideInfos = !this.hideInfos;
     if(!this.hideInfos){
       this.renderer.setElementStyle(this.singleMovieCard.nativeElement, 'opacity', '0');
-      this.renderer.setElementStyle(this.hideButton.nativeElement, 'background-color', 'transparent');
     }else{
       this.renderer.setElementStyle(this.singleMovieCard.nativeElement, 'opacity', '1');
-      this.renderer.setElementStyle(this.hideButton.nativeElement, 'background-color', 'white');
-
     }
   }
 
   goToSeason(seasonID: any, serieID: any){
     this.navCtrl.navigateForward(['single-season', {seasonID: seasonID, serieID:serieID}]);
+  }
+
+  AddToFavorite(films: any){
+    this.favorites.AddToFavorite(films);
+  }
+
+  IsInFavorite(films: any){
+    return this.favorites.IsInFavorite(films);
   }
 }

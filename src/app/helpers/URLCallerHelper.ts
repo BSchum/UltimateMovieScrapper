@@ -9,10 +9,8 @@ export class URLCallerHelper{
     Get(url: string, type: any = 'json'){
         return new Promise((resolve, reject) => {
             this.http.get(url, {responseType: type}).subscribe(data => {
-                console.log("resolve UrlCallerhelper");
                 resolve(data);
             }, err => {
-                console.log("reject UrlCallerHelper");
                 reject(err);
             });
         });

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-button (click)="exportJson()" >Export </ion-button>
+  <div *ngFor="let item of favorites">
+    <ion-card>
+      <ion-card-header>
+          <div class="fav-title">{{item.Title}}</div>
+          <ion-badge class="type">{{item.Type}}</ion-badge>
+          <ion-button class="delete" (click)="GoToFilm(item.imdbID)"><ion-icon name="arrow-round-forward"></ion-icon></ion-button>
+          <ion-button class="delete" (click)="Delete(item)"><ion-icon name="close"></ion-icon></ion-button>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

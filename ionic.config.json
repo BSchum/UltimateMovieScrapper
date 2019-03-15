@@ -1,6 +1,8 @@
 {
   "name": "UMS",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "8a8d559a"
 }

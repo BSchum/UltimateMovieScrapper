@@ -1,3 +1,4 @@
+import { FavoriteService } from './../services/favorite.service';
 import { ActivatedRoute } from '@angular/router';
 import { SingleMoviePage } from './../single-movie/single-movie.page';
 import { MovieProviderService } from './../services/movie-provider.service';
@@ -16,9 +17,7 @@ export class HomePage implements OnInit{
   movies: any;
   searchText: string;
 
-  constructor(private provider: MovieProviderService, private navCtrl: NavController, private route:ActivatedRoute){
-
-  }
+  constructor(private provider: MovieProviderService, private navCtrl: NavController, private route:ActivatedRoute, private favorites: FavoriteService){}
 
   OnSearch(search: string){
     if(search != ""){

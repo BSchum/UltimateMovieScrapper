@@ -1,3 +1,4 @@
+import { FavoriteService } from './../services/favorite.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,10 +23,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     HttpClientModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [SingleMoviePage],
-  providers: [MovieProviderService, URLCallerHelper, HttpClient]
+  providers: [MovieProviderService, URLCallerHelper, HttpClient, FavoriteService]
 
 })
 export class SingleMoviePageModule {}

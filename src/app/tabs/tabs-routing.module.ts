@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: '../home/home.module#HomePageModule'
       },
       {
+        path: 'favorites',
+        loadChildren: '../favorites/favorites.module#FavoritesPageModule'
+      },
+      {
         path: '',
         redirectTo: '/tabs/home/movies',
         pathMatch: 'full'

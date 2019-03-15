@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'single-movie', loadChildren: './single-movie/single-movie.module#SingleMoviePageModule' },
   { path: 'single-season', loadChildren: './single-season/single-season.module#SingleSeasonPageModule' },
+  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
 ];
 @NgModule({
   imports: [
@@ -12,5 +13,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {} 
 

@@ -24,7 +24,6 @@ var HomePage = /** @class */ (function () {
                 if (data.id == "movies") {
                     _this.provider.GetMovies(search).then(function (data) {
                         _this.movies = data;
-                        console.log(_this.movies);
                         _this.movies.Search.sort(function (a, b) {
                             return b.Year - a.Year;
                         });
@@ -33,7 +32,6 @@ var HomePage = /** @class */ (function () {
                 else {
                     _this.provider.GetSeries(search).then(function (data) {
                         _this.movies = data;
-                        console.log(_this.movies);
                         _this.movies.Search.sort(function (a, b) {
                             return b.Year - a.Year;
                         });
