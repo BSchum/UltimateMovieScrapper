@@ -52,7 +52,9 @@ export class SingleMoviePage implements OnInit {
         });
     });
   }
-
+  goBack(){
+    this.navCtrl.goBack();
+  }
   fadeCard(){
     this.hideInfos = !this.hideInfos;
     if(!this.hideInfos){

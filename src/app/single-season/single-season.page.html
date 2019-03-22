@@ -1,13 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>single-season</ion-title>
+    <ion-title>Saison</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <div *ngIf="season" >
     <ion-list *ngFor="let episode of season.Episodes" >
-      <ion-item>
+      <ion-button (click)="AddEpisodeToFavorites(episode)">
+          <ion-icon *ngIf="IsInFav(episode)"  name="star"></ion-icon>
+          <ion-icon *ngIf="!IsInFav(episode)" name="star-outline"></ion-icon>
+      </ion-button>
+      <ion-item (click)="goToMovie(episode.imdbID)" >
         <ion-label>
           {{episode.Title}}
         </ion-label>

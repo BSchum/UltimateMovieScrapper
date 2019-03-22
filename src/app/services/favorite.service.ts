@@ -11,7 +11,6 @@ export class FavoriteService {
 
   GetFavorites(): any[]{
     if(localStorage.getItem("favorites") != null){
-      console.log(JSON.parse(localStorage.getItem("favorites")));
       this.favorites =  JSON.parse(localStorage.getItem("favorites"));
     }else{
       this.favorites = [];
@@ -30,8 +29,8 @@ export class FavoriteService {
     }
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   }
+
   DeleteExistingFilm(films: any){
-    console.log("LOL");
     var index = this.favorites.findIndex((element) => {
       return element.Title == films.Title;
     });
@@ -40,6 +39,7 @@ export class FavoriteService {
     }
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   }
+  
   IsInFavorite(films: any){
     return this.GetFavorites().find((element) => {
       return element.Title == films.Title;

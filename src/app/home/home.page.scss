@@ -26,3 +26,11 @@
 ion-card{
     margin-top: -4px;
 }
+
+@media (min-width: 757px){
+    .movie-card{
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

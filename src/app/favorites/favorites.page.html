@@ -3,20 +3,36 @@
     <ion-title>Mes favoris</ion-title>
     <div class="jsoncsvtoggle">
       <ion-label>JSON / CSV</ion-label>
-      <ion-toggle [(ngModel)]="toCSV" disable="true" class="toggle"></ion-toggle>
+      <ion-toggle (ionChange)="GetSafeUrl()" [(ngModel)]="toCSV" disable="true" class="toggle"></ion-toggle>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="exportJson()">Export</ion-button>
-  <ion-button (click)="importJson()">Import</ion-button>
 
+  <div *ngIf="isNative">
+    <ion-button (click)="exportJson()">Export</ion-button>
+  </div>
+  <div *ngIf="!isNative">
+    <div *ngIf="!toCSV" >
+      <a [href]="safeUrl" download="favorites.json">Export</a>
+    </div>
+    <div *ngIf="toCSV" >
+        <a [href]="safeUrl" download="favorites.csv">Export</a>
+    </div>
+  </div>
+  <div *ngIf="isNative">
+    <ion-button (click)="importJson()">Import</ion-button>
+  </div>
+  <div *ngIf="!isNative">
+    <input accept=".csv,.json"(change)="importJsonPC($event)" type="file">
+  </div>
   <div *ngFor="let item of favorites">
     <ion-card>
       <ion-card-header>
           <div class="fav-title">{{item.Title}}</div>
-          <ion-badge class="type">{{item.Type}}</ion-badge>
+          <ion-badge *ngIf="item.Type != null" class="type">{{item.Type}}</ion-badge>
+          <ion-badge *ngIf="item.Type == null" class="type">episode</ion-badge>
           <ion-button class="delete" (click)="GoToFilm(item.imdbID)"><ion-icon name="arrow-round-forward"></ion-icon></ion-button>
           <ion-button class="delete" (click)="Delete(item)"><ion-icon name="close"></ion-icon></ion-button>
       </ion-card-header>
