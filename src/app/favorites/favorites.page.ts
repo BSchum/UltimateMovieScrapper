@@ -1,12 +1,11 @@
 import { FileStorageService } from './../services/file-storage.service';
 import { FavoriteService } from './../services/favorite.service';
-import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { stringify } from '@angular/core/src/render3/util';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import * as converter from 'json-2-csv';
 
 @Component({
   selector: 'app-favorites',
@@ -15,11 +14,12 @@ import { stringify } from '@angular/core/src/render3/util';
 })
 export class FavoritesPage {
   favorites: any[];
-  constructor(private favoritesService: FavoriteService, 
-              private alertCtrl: AlertController, 
-              private permissions: AndroidPermissions,  
+  toCSV : boolean = true;
+  constructor(private favoritesService: FavoriteService,
+              private alertCtrl: AlertController,
               private fileStorage: FileStorageService,
               private navCtrl: NavController) { }
+
   ionViewDidEnter(){
     this.favorites = this.favoritesService.GetFavorites();
   }
@@ -48,11 +48,24 @@ export class FavoritesPage {
   }
   
   exportJson(){
-    this.fileStorage.exportFile(JSON.stringify(this.favoritesService.GetFavorites()), "text", "json");
+    if(this.toCSV){
+      converter.json2csv(this.favoritesService.GetFavorites(), (err, file) => {
+        this.fileStorage.exportFile(file, "text", "csv");
+      }, {})
+      
+    }else{
+      this.fileStorage.exportFile(JSON.stringify(this.favoritesService.GetFavorites()), "text", "json");
+    }
   }
 
   importJson(){
-    this.fileStorage.importFile();
+    this.fileStorage.importFile().then((parsedFavorites) => {
+      this.favoritesService.ReplaceFavorites(parsedFavorites);
+      this.favorites = this.favoritesService.GetFavorites();
+    })
+    .catch((message) => {
+      console.log(message);
+    });
   }
 
   GoToFilm(id: any){

@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { FavoritesPage } from './favorites.page';
 import { IonicStorageModule } from '@ionic/storage';
+import { Device } from '@ionic-native/device/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 
 const routes: Routes = [
@@ -26,7 +29,7 @@ const routes: Routes = [
     IonicStorageModule.forRoot()
   ],
   declarations: [FavoritesPage],
-  providers: [FavoriteService]
+  providers: [FavoriteService, FileChooser, FilePath]
 
 })
 export class FavoritesPageModule {}

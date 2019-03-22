@@ -7,7 +7,6 @@ import { Injectable } from '@angular/compiler/src/core';
 import { providerDef } from '@angular/core/src/view';
 import { NavController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

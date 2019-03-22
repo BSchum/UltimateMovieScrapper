@@ -45,4 +45,9 @@ export class FavoriteService {
       return element.Title == films.Title;
     }) != null;
   }
+
+  ReplaceFavorites(favorites: any){
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    this.GetFavorites();
+  }
 } 

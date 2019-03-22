@@ -1,11 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>favorites</ion-title>
+    <ion-title>Mes favoris</ion-title>
+    <div class="jsoncsvtoggle">
+      <ion-label>JSON / CSV</ion-label>
+      <ion-toggle [(ngModel)]="toCSV" disable="true" class="toggle"></ion-toggle>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="exportJson()" >Export </ion-button>
+  <ion-button (click)="exportJson()">Export</ion-button>
+  <ion-button (click)="importJson()">Import</ion-button>
+
   <div *ngFor="let item of favorites">
     <ion-card>
       <ion-card-header>

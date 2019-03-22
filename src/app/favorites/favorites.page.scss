@@ -14,3 +14,18 @@
     font-size: 20px;
     color: black;
 }
+ion-title{
+    padding: 10px;
+    float: left;
+}
+.jsoncsvtoggle{
+    // position: absolute;
+    // right: 0;
+    // top : 0;
+    float: right;
+    padding: 10px;
+    height: auto;
+    .toggle{
+        vertical-align: middle;
+    }
+}
